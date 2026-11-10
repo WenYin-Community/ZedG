@@ -49,6 +49,20 @@ def scan(root: str = I18N_ROOT) -> list[dict]:
     return rows
 
 
+DNT_PATH = Path("config/do_not_translate.json")
+
+
+def count_do_not_translate() -> tuple[int, int]:
+    """返回 (文件级条目数, 全局条目数)；文件缺失或损坏时返回 (0, 0)。"""
+    if not DNT_PATH.exists():
+        return 0, 0
+    try:
+        data = json.loads(DNT_PATH.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return 0, 0
+    return len(data.get("entries", [])), len(data.get("global_entries", []))
+
+
 def _version_key(version: str) -> tuple[int, ...]:
     """把 v1.26.2 之类的版本号转成可比较的数字元组。"""
     return tuple(int(x) for x in re.findall(r"\d+", version))
@@ -79,8 +93,8 @@ def _render_bars(rows: list[dict], width: int) -> list[str]:
     return lines
 
 
-def render(rows: list[dict]) -> str:
-    """全部版本保留；默认显示最近 3 行，其余折叠。"""
+def render(rows: list[dict], dnt_entries: int = 0, dnt_global: int = 0) -> str:
+    """全部版本保留；默认显示最近 3 行，其余折叠；附禁翻清单数量。"""
     if not rows:
         return "> 暂无翻译数据。"
 
@@ -92,14 +106,18 @@ def render(rows: list[dict]) -> str:
     visible, rest = rows[:3], rows[3:]
 
     body = "\n".join(_render_table(visible) + [""] + _render_bars(visible, width))
+    dnt_line = (
+        f"禁翻清单：{dnt_entries + dnt_global:,} 条"
+        f"（文件级 {dnt_entries:,} + 全局 {dnt_global:,}）"
+    )
     if not rest:
-        return body
+        return f"{body}\n\n{dnt_line}"
 
     rest_body = "\n".join(
         _render_table(rest) + [""] + _render_bars(rest, width)
     )
     return (
-        f"{body}\n\n"
+        f"{body}\n\n{dnt_line}\n\n"
         "<details>\n"
         f"<summary>展开查看其余 {len(rest)} 行（共 {len(rows)} 行）</summary>\n\n"
         f"{rest_body}\n\n"
@@ -113,7 +131,8 @@ def main() -> int:
         print("未找到翻译数据，保持 README 不变", file=sys.stderr)
         return 1
 
-    body = render(rows)
+    dnt_entries, dnt_global = count_do_not_translate()
+    body = render(rows, dnt_entries, dnt_global)
     text = README.read_text(encoding="utf-8")
     if not MARKER.search(text):
         print("README 中缺少 STATS 标记", file=sys.stderr)
@@ -127,6 +146,7 @@ def main() -> int:
     print(f"已更新 {len(rows)} 种语言:")
     for r in rows:
         print(f"  {r['lang']} {r['version']}: {r['filled']:,}/{r['total']:,} = {r['pct']:.1f}%")
+    print(f"禁翻清单: {dnt_entries + dnt_global:,} 条（文件级 {dnt_entries:,} + 全局 {dnt_global:,}）")
     return 0
 
 

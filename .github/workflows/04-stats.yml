@@ -8,8 +8,9 @@ on:
     workflows: ["03 补翻译（不构建）"]
     types: [completed]
   schedule:
-    # 每天北京时间 14:00，在 03 的 13:00 之后
-    - cron: "0 6 * * *"
+    # GitHub schedule 实测稳定延迟约 7.5~8 小时（cron 为 UTC）。
+    # 提前 8 小时：UTC 22:00 = 北京次日 06:00，延迟后约北京次日 14:00。
+    - cron: "0 22 * * *"
   workflow_dispatch:
 
 permissions:
