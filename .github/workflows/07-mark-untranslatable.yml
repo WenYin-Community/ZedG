@@ -43,6 +43,9 @@ jobs:
     steps:
       - name: 检出仓库
         uses: actions/checkout@v4
+        with:
+          # 提交前需要 rebase 到最新 main（运行期间 04-stats 等会提交 README）
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -97,7 +100,11 @@ jobs:
           git add config/do_not_translate.json
           if git diff --cached --quiet; then
             echo "禁翻清单无变化"
-          else
-            git commit -m "chore(i18n): 更新禁翻清单，减少增量翻译重复请求"
-            git push origin HEAD:main
+            exit 0
           fi
+          git commit -m "chore(i18n): 更新禁翻清单，减少增量翻译重复请求"
+          # 运行期间 main 可能有其他提交（如 04-stats 更新 README），
+          # push 前先 rebase，避免 non-fast-forward 被拒。
+          git fetch origin main
+          git rebase origin/main
+          git push origin HEAD:main
