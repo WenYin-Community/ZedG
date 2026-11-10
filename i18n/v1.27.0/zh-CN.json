@@ -15335,10 +15335,10 @@
         "Provide a name": "提供名称",
         "hello": "",
         "after-elicitation": "",
-        "append current message after elicitation": "",
-        "restoring history should not build a diff editor for a collapsed tool call": "",
-        "materializing a restored diff must not emit NewDiff": "",
-        "expected tool call": ""
+        "append current message after elicitation": "在引导后追加当前消息",
+        "restoring history should not build a diff editor for a collapsed tool call": "恢复历史记录不应为已折叠的工具调用构建差异编辑器",
+        "materializing a restored diff must not emit NewDiff": "物化已恢复的差异不得触发 NewDiff 事件",
+        "expected tool call": "应为工具调用"
     },
     "zed/crates/agent_ui/src/external_source_prompt.rs": {
         "Write me a script\\nThanks": "",
@@ -15910,7 +15910,7 @@
         "ask": "",
         "auto": "",
         "test-agent": "",
-        "test agent server cannot connect": "",
+        "test agent server cannot connect": "测试代理服务器无法连接",
         "Auto": "自动",
         "Manual": "手动",
         "Ask": "询问"
@@ -17911,8 +17911,8 @@
         "Linux {} counter {operation} failed: {error}": "Linux {} 计数器{operation}失败: {error}",
         "{}": "",
         "read": "读取",
-        "time-enabled counter data was requested": "",
-        "time-running counter data was requested": "",
+        "time-enabled counter data was requested": "已请求时间启用计数器数据",
+        "time-running counter data was requested": "已请求时间运行计数器数据",
         "thread {thread_id}": "线程 {thread_id}",
         "/proc/self/task": "",
         "failed to enumerate benchmark process threads: {error}": "枚举基准测试进程线程失败: {error}",
