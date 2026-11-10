@@ -1,11 +1,11 @@
 name: 04 翻译统计
 
 # 统计各语言翻译覆盖率，回写 README 的 STATS 区块。
-# 由 03 补翻译完成后自动触发，另设每日兜底。
+# 由 03 补翻译 / 07 标记完成后自动触发，另设每日兜底。
 
 on:
   workflow_run:
-    workflows: ["03 补翻译（不构建）"]
+    workflows: ["03 补翻译（不构建）", "07 标记无需翻译条目"]
     types: [completed]
   schedule:
     # GitHub schedule 实测稳定延迟约 7.5~8 小时（cron 为 UTC）。
