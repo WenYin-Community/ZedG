@@ -7958,7 +7958,8 @@
         "<details><summary>More</summary>See <a href=\\\"https://example.com\\\">link</a> &amp; details.</details>": "<details><summary>更多</summary>查看 <a href=\\\"https://example.com\\\">链接</a> 及详情。</details>",
         "<a href=\\\"https://example.com\\\">link</a>": "<a href=\\\"https://example.com\\\">链接</a>",
         "<a href=\\\"x\\\">&'</a>": "",
-        "---\\nname: project-skill\\ndescription: A project skill\\n---\\n\\nProject content": "---\\nname: project-skill\\ndescription: 一个项目技能\\n---\\n\\n项目内容"
+        "---\\nname: project-skill\\ndescription: A project skill\\n---\\n\\nProject content": "---\\nname: project-skill\\ndescription: 一个项目技能\\n---\\n\\n项目内容",
+        "<skill_content name=\\\"{}\\\">": ""
     },
     "zed/crates/agent/src/tools/spawn_agent_tool.rs": {
         "snake_case": "",
@@ -18601,7 +18602,7 @@
         "classic": "",
         "add": "",
         "macos": "",
-        "`~/Library/Application Support/Zed`.": "",
+        "`~/Library/Application Support/Zed`.": "`~/Library/Application Support/Zed`。",
         "`%LOCALAPPDATA%\\\\Zed`.": "",
         "`$XDG_DATA_HOME/zed`.": "",
         "DIR": "",
@@ -18645,7 +18646,7 @@
         "{}": "",
         "The `--system-specs` argument is not supported in the Zed CLI, only on Zed binary.": "`--system-specs` 参数在 Zed CLI 中不受支持,仅在 Zed 二进制文件中支持。",
         "To retrieve the system specs on the command line, run the following command:": "要在命令行中获取系统规格,请运行以下命令:",
-        "{} --system-specs": "",
+        "{} --system-specs": "{} --system-specs",
         "\\n": "",
         "../../../script/uninstall.sh": "",
         "uninstall.sh": "",
@@ -18668,11 +18669,11 @@
         "memfd:": "",
         "/dev/fd/": "",
         "Add to existing Zed window ({})": "添加到现有 Zed 窗口 ({})",
-        "zed --existing": "",
+        "zed --existing": "zed --existing",
         "Open a new window ({})": "打开新窗口 ({})",
-        "zed --classic": "",
+        "zed --classic": "zed --classic",
         "Configure default behavior for {}\\n{}": "配置 {} 的默认行为\\n{}",
-        "zed <path>": "",
+        "zed <path>": "zed <path>",
         "You can change this later in Zed settings": "稍后可在 Zed 设置中更改",
         "no parent path for cli": "cli 没有父路径",
         "../libexec/zed-editor": "",
@@ -18699,7 +18700,7 @@
         "LD_LIBRARY_PATH": "",
         "/usr/bin/flatpak-spawn": "",
         "--host": "",
-        "--env=ZED_UPDATE_EXPLANATION=Please use flatpak to update zed": "",
+        "--env=ZED_UPDATE_EXPLANATION=Please use flatpak to update zed": "--env=ZED_UPDATE_EXPLANATION=请使用 flatpak 更新 zed",
         "--env={EXTRA_LIB_ENV_NAME}={}": "",
         "lib": "",
         "bin": "",
@@ -20318,7 +20319,9 @@
         "remote client should still be trusted": "远程客户端仍应被信任",
         "Foo": "",
         "bar": "",
-        "struct Foo {\n    bar: u32,\n}\n": ""
+        "struct Foo {\n    bar: u32,\n}\n": "",
+        "<div class=\\\"wrap\\\">hello</div>": "",
+        "<p><div class=\\\"wrap\\\">hello</div></p>": ""
     },
     "zed/crates/collab/tests/integration/following_tests.rs": {
         "user_a": "",
@@ -21098,7 +21101,8 @@
         "Local resolve should be forwarded over SSH and run on the remote LSP": "本地解析应通过 SSH 转发并在远程 LSP 上运行",
         "Local cache should mirror the single document link": "本地缓存应镜像该单个文档链接",
         "local cache should contain the mirrored link": "本地缓存应包含镜像的链接",
-        "Local should see the file:// target resolved on the remote": "本地应看到 file:// 目标在远程被解析"
+        "Local should see the file:// target resolved on the remote": "本地应看到 file:// 目标在远程被解析",
+        "let one = \\\"two\\\"": ""
     },
     "zed/crates/collab/tests/integration/test_server.rs": {
         "USE_POSTGRES": "",
@@ -21379,7 +21383,7 @@
         "{} wants to add you as a contact": "{} 想将你添加为联系人",
         "{} accepted your contact request": "{} 接受了你的联系人请求",
         "{} invited you to join the #{channel_name} channel": "{} 邀请你加入 #{channel_name} 频道",
-        "{display_name} ({})": "",
+        "{display_name} ({})": "{display_name} ({})",
         "Collab Panel": "协作面板",
         "Join Channel": "加入频道",
         "accept": "",
@@ -26870,7 +26874,7 @@
         "value += old_name + 1;": "",
         "value += very_long_predicted_name + 1;": "",
         "value += new_name + 1;": "",
-        "expected needle in synthetic input": "",
+        "expected needle in synthetic input": "合成输入中应包含目标字符串",
         "foo + foo + foo + foo + foo\\n": "",
         "foo + foo + prediction_token + foo + foo\\n": "",
         "foo + foo + kept_token + foo + foo\\n": "",
@@ -100251,7 +100255,7 @@
         "test-support": ""
     },
     "zed/crates/credentials_provider/src/test_support.rs": {
-        "keyring unavailable": "",
+        "keyring unavailable": "密钥链不可用",
         "Bearer": ""
     },
     "zed/crates/gpui_apple/src/process_info.rs": {
