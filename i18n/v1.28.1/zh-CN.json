@@ -6763,7 +6763,7 @@
         "How many breakpoint hits to ignore": "忽略多少次断点命中",
         "A multi buffer in breakpoint prompt isn't possible": "断点提示中无法使用多缓冲区",
         "Conflict with Accept Keybinding": "接受快捷键冲突",
-        "Your keymap currently overrides the default accept keybinding. To continue, assign one keybinding for the `editor::AcceptEditPrediction` action.": "你的键位映射当前覆盖了默认的接受快捷键。要继续，请为 `editor::AcceptEditPrediction` 操作分配一个快捷键。",
+        "Your keymap currently overrides the default accept keybinding. To continue, assign one keybinding for the `editor::AcceptEditPrediction` action.": "你的键位映射当前覆盖了默认的接受快捷键。要继续,请为 `editor::AcceptEditPrediction` 操作分配一个快捷键。",
         "open-keymap": "",
         "Assign Keybinding": "分配快捷键",
         "see-docs": "",
@@ -78544,7 +78544,7 @@
         "DO NOT USE!": "请勿使用!",
         "/anyOf": "",
         "anyOf should be present": "anyOf 应当存在",
-        "Deprecated, use workspace::CloseActiveItem": "已弃用,请使用 workspace::CloseActiveItem"
+        "Deprecated, use workspace::CloseActiveItem": "已弃用，请使用 workspace::CloseActiveItem"
     },
     "zed/crates/settings_content/src/agent.rs": {
         "a percentage string like \"90%\" or an integer number of tokens": "类似 \"90%\" 的百分比字符串或表示 token 数量的整数",
@@ -80707,7 +80707,7 @@
         "title_bar.button_layout$": "",
         "close:minimize,maximize": "",
         "Custom Button Layout": "自定义按钮布局",
-        "GNOME-style layout string such as \"close:minimize,maximize\".": "GNOME 风格的布局字符串,例如 \"关闭:minimize,maximize\"。",
+        "GNOME-style layout string such as \"close:minimize,maximize\".": "GNOME 风格的布局字符串,例如 \"关闭:minimize,maximize\".",
         "title_bar.button_layout": "",
         "Open Menus on Hover": "悬停时打开菜单",
         "Automatically open menus in the titlebar on hover.": "悬停时自动打开标题栏中的菜单。",
@@ -80787,7 +80787,7 @@
         "focus_follows_mouse.debounce_ms": "",
         "Window": "窗口",
         "Title Format": "标题格式",
-        "Window title template. Available variables are `${projectName}`, `${fileName}`, `${filePath}`, `${relativePath}`, `${fileStem}`, `${remoteName}`, `${remoteHost}`, `${appName}`, `${branch}`, and `${separator}`. `${separator}` is omitted when adjacent variables are empty, but literal text is preserved. The collaboration indicator, when present, is appended after the rendered template. If the template renders to nothing, the default template is used instead.": "窗口标题模板。可用变量包括 `${projectName}`、`${fileName}`、`${filePath}`、`${relativePath}`、`${fileStem}`、`${remoteName}`、`${remoteHost}`、`${appName}`、`${branch}` 和 `${separator}`。当相邻变量为空时 `${separator}` 会被省略,但字面文本会保留。协作指示器(如果存在)会附加在渲染后的模板之后。如果模板渲染结果为空,则改用默认模板。",
+        "Window title template. Available variables are `${projectName}`, `${fileName}`, `${filePath}`, `${relativePath}`, `${fileStem}`, `${remoteName}`, `${remoteHost}`, `${appName}`, `${branch}`, and `${separator}`. `${separator}` is omitted when adjacent variables are empty, but literal text is preserved. The collaboration indicator, when present, is appended after the rendered template. If the template renders to nothing, the default template is used instead.": "窗口标题模板。可用变量包括 `${projectName}`、`${fileName}`、`${filePath}`、`${relativePath}`、`${fileStem}`、`${remoteName}`、`${remoteHost}`、`${appName}`、`${branch}` 和 `${separator}`。当相邻变量为空时 `${separator}` 会被省略，但字面文本会保留。协作指示器（如果存在）会附加在渲染后的模板之后。如果模板渲染结果为空，则改用默认模板。",
         "window_title_format": "",
         "${projectName}${separator}${fileName}": "",
         "Title Separator": "标题分隔符",
@@ -81149,7 +81149,16 @@
         "debugger.default_width": "",
         "debugger.default_height": "",
         "git.auto_fetch.enabled": "",
-        "git.auto_fetch.interval_secs": ""
+        "git.auto_fetch.interval_secs": "",
+        "Controls line number display in the editor's gutter. \\\"disabled\\\" shows absolute line numbers, \\\"enabled\\\" shows relative line numbers for each absolute line, and \\\"wrapped\\\" shows relative line numbers for every line, absolute or wrapped.": "控制编辑器行号槽中的行号显示。\\\"禁用\\\"显示绝对行号,\\\"启用\\\"显示每个绝对行号对应的相对行号,\\\"换行\\\"则对每一行显示相对行号,无论是否为绝对行或换行行。",
+        "Files or globs of files that will be excluded by Zed entirely. They will be skipped during file scans, file searches, and not be displayed in the project file tree. Takes precedence over \\\"File Scan Inclusions\\\"": "Zed 将完全排除的文件或文件 glob 模式。这些文件在扫描和搜索时会被跳过,也不会显示在项目文件树中。此设置优先于\\\"文件扫描包含项\\\"。",
+        "Files or globs of files that will be included by Zed, even when ignored by git. This is useful for files that are not tracked by git, but are still important to your project. Note that globs that are overly broad can slow down Zed's file scanning. \\\"File Scan Exclusions\\\" takes precedence over these inclusions": "Zed 将包含的文件或文件 glob 模式,即使它们被 git 忽略也是如此。这对于未被 git 跟踪但对项目仍然重要的文件非常有用。请注意,过于宽泛的 glob 模式可能会降低 Zed 的文件扫描速度。\\\"文件扫描排除项\\\"优先于这些包含项。",
+        "GNOME-style layout string such as \\\"close:minimize,maximize\\\".": "GNOME 风格的布局字符串,例如 \\\"关闭:minimize,maximize\\\"。",
+        "When auto compaction runs. A percentage string like \\\"90%\\\" is measured against the context window. A positive integer is the number of used tokens to compact after. A negative integer is the number of tokens remaining in the context window before compacting.": "自动压缩的触发条件。像 \\\"90%\\\" 这样的百分比字符串表示相对于上下文窗口的比例。正整数表示在使用的令牌数达到该数量后进行压缩。负整数表示上下文窗口中剩余令牌数达到该值时进行压缩。",
+        "Whether to use additional LSP queries to format (and amend) the code after every \\\"trigger\\\" symbol input, defined by LSP server capabilities": "是否在每次输入 \\\"触发\\\" 符号后,使用额外的 LSP 查询来格式化(和修正)代码。触发符号由 LSP 服务器的能力定义。",
+        "Visible character used to render space characters when show_whitespaces is enabled (default: \\\"•\\\")": "启用 show_whitespaces 时,用于渲染空格字符的可见字符(默认:\\\"•\\\")。",
+        "Visible character used to render tab characters when show_whitespaces is enabled (default: \\\"→\\\")": "启用 show_whitespaces 时,用于渲染制表符的可见字符(默认:\\\"→\\\")。",
+        "On: format the whole buffer.\\nOff: do not format.\\nModifications: format only lines with unstaged changes; skips formatting when a git diff or LSP range formatting is unavailable.\\nModifications If Available: same, but falls back to formatting the whole buffer.": "开启:格式化整个缓冲区。\\n关闭:不格式化。\\n仅修改:只格式化有未暂存更改的行;如果无法进行 git 差异或 LSP 范围格式化,则跳过格式化。\\n修改可用时:同\\\"仅修改\\\",但在无法进行局部格式化时回退为格式化整个缓冲区。"
     },
     "zed/crates/settings_ui/src/pages/audio_input_output_setup.rs": {
         "System Default": "系统默认",
@@ -92724,7 +92733,8 @@
         "y shift-p": "",
         "the line after": "下一行",
         "x y up up p": "",
-        "y p p": ""
+        "y p p": "",
+        "\\\" + p": ""
     },
     "zed/crates/vim/src/helix/surround.rs": {
         "hello ˇworld": "",
@@ -99988,7 +99998,7 @@
         "editor::MoveUp": "",
         "ctrl-p should still move up, got {ctrl_p:?}": "ctrl-p 仍应向上移动,得到 {ctrl_p:?}",
         "file_finder::Toggle": "",
-        "ctrl-p should not fall through to file_finder::Toggle, got {ctrl_p:?}": "ctrl-p 不应落到 file_finder::Toggle,得到 {ctrl_p:?}",
+        "ctrl-p should not fall through to file_finder::Toggle, got {ctrl_p:?}": "ctrl-p 不应落到 file_finder::Toggle，得到 {ctrl_p:?}",
         "Workspace Editor showing_completions": "工作区编辑器 showing_completions",
         "editor::ContextMenuNext": "",
         "editor::ContextMenuPrevious": "",
