@@ -103,8 +103,12 @@ jobs:
             exit 0
           fi
           git commit -m "chore(i18n): 更新禁翻清单，减少增量翻译重复请求"
-          # 运行期间 main 可能有其他提交（如 04-stats 更新 README），
-          # push 前先 rebase，避免 non-fast-forward 被拒。
+          # 运行期间 main 可能有其他提交（如 04-stats 更新 README）。
+          # config 是全量重写，rebase 若与远程版本冲突，以本次生成结果为准。
           git fetch origin main
-          git rebase origin/main
+          if ! git rebase origin/main; then
+            git checkout --theirs config/do_not_translate.json
+            git add config/do_not_translate.json
+            GIT_EDITOR=true git rebase --continue
+          fi
           git push origin HEAD:main
