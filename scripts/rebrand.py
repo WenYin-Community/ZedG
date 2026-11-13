@@ -569,6 +569,25 @@ def apply_category_6(zed_dir: Path, *, dry_run: bool = False) -> None:
 # Category 7: Auto-update redirect to ZedG GitHub releases
 # ---------------------------------------------------------------------------
 
+def _ensure_dependency(
+    cargo_path: Path, dep: str, *, dry_run: bool = False,
+) -> None:
+    """幂等地把 workspace 依赖加入 [dependencies]。"""
+    content = read_file(cargo_path)
+    if content is None:
+        return
+    if re.search(rf'^{re.escape(dep)}\s*[.=]', content, re.MULTILINE):
+        return
+    new_content = re.sub(
+        r'(\[dependencies\]\n)',
+        rf'\1{dep}.workspace = true\n',
+        content, count=1,
+    )
+    if new_content != content:
+        write_file(cargo_path, new_content, dry_run=dry_run)
+        log.info("  [patched] %s (add %s dependency)", cargo_path, dep)
+
+
 def apply_category_7(zed_dir: Path, *, dry_run: bool = False) -> None:
     """Category 7: Auto-update redirect to GitHub releases."""
     log.info("Category 7: Auto-update redirect to GitHub releases")
@@ -580,10 +599,19 @@ def apply_category_7(zed_dir: Path, *, dry_run: bool = False) -> None:
 
     original = content
 
-    # 7a. Add import for github module (idempotent check)
+    # 7a. Add import for latest_github_release (idempotent check)
     if "latest_github_release" not in content:
         pat = r'(use\s+http_client::\{[^}]*HttpClientWithUrl[^}]*\};)'
-        repl = r'\1\nuse http_client::github::latest_github_release;'
+        # 上游 v1.28+ 把该函数移到独立的 github_releases crate
+        if (zed_dir / "crates" / "github_releases").is_dir():
+            import_line = "use github_releases::latest_github_release;"
+            _ensure_dependency(
+                zed_dir / "crates" / "auto_update" / "Cargo.toml",
+                "github_releases", dry_run=dry_run,
+            )
+        else:
+            import_line = "use http_client::github::latest_github_release;"
+        repl = r'\1\n' + import_line
         new_content = re.sub(pat, repl, content, count=1)
         if new_content == content:
             log.warning("  Pattern not matched for github import in %s", auto_update)
