@@ -120,6 +120,21 @@ class TranslateBatchGuardTest(unittest.IsolatedAsyncioTestCase):
             )
         self.assertEqual(result[source], "")
 
+    async def test_escaped_newline_key_matched(self):
+        """模型把换行输出为字面 \\n 时，归一化后仍应匹配原文。"""
+        source = "line1\nline2 {}"
+        numbered, _ = number_anonymous_placeholders(source)
+        escaped = numbered.replace("\n", "\\n")
+
+        async def fake_fetch(client, model, file_path, strings, content, prompt):
+            return {escaped: "行1\\n行2 {__PH0__}"}
+
+        with mock.patch.object(translate, "_fetch_translation", fake_fetch):
+            result = await translate._translate_batch(
+                object(), "model", "x.rs", {source: ""}, "", "prompt",
+            )
+        self.assertEqual(result[source], "行1\\n行2 {}")
+
 
 class KeyContextGuardTest(unittest.TestCase):
     """keymap context 键翻译导致快捷键静默失效的回归测试（issue #1）"""

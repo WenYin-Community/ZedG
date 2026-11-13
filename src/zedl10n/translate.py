@@ -272,11 +272,24 @@ async def _translate_batch(
         numbered[numbered_original] = ""
         placeholder_map[numbered_original] = (original, placeholders)
 
+    # 归一化索引：模型有时把换行输出为字面 \n、或改动首尾空白
+    def _normalize_key(s: str) -> str:
+        return (
+            s.replace("\\r", "\r").replace("\\n", "\n").replace("\\t", "\t")
+        ).strip()
+
+    normalized_map: dict[str, tuple[str, list[str]]] = {}
+    for nkey, entry in placeholder_map.items():
+        normalized_map.setdefault(_normalize_key(nkey), entry)
+
     def restore(raw_result: dict[str, str]) -> dict[str, str]:
         """把编号化译文还原为原文，并执行路径/占位符护栏。"""
         restored: dict[str, str] = {}
         for numbered_original, value in raw_result.items():
             entry = placeholder_map.get(numbered_original)
+            if entry is None:
+                # 回退：容忍模型输出中换行/空白的差异
+                entry = normalized_map.get(_normalize_key(numbered_original))
             if entry is None:
                 log.warning(
                     "模型返回未知 key（占位符标记可能被改写），丢弃: %r [%s]",
