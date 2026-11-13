@@ -306,6 +306,7 @@ jobs:
           rustup default stable
 
       - name: 安装 sccache
+        if: ${{ false }}  # Windows 禁用 sccache（命令行长度限制，见下方说明）
         shell: pwsh
         run: |
           $installed = $false
@@ -354,13 +355,10 @@ jobs:
             }
           }
 
-          if ($installed) {
-            echo "SCCACHE_AVAILABLE=true" >> $env:GITHUB_ENV
-            Write-Host "✓ sccache 可用，将启用编译缓存"
-          } else {
-            echo "SCCACHE_AVAILABLE=false" >> $env:GITHUB_ENV
-            Write-Host "⚠ sccache 所有安装方式均失败，将不使用编译缓存"
-          }
+          # Windows 上 sccache 包装 rustc 后命令行会超过 32K 限制
+          # （os error 206: The filename or extension is too long），禁用编译缓存。
+          echo "SCCACHE_AVAILABLE=false" >> $env:GITHUB_ENV
+          Write-Host "⚠ Windows 构建禁用 sccache（命令行长度限制）"
 
       - name: 从 Artifact 恢复 sccache 缓存
         if: env.SCCACHE_AVAILABLE == 'true'
@@ -678,6 +676,7 @@ jobs:
           rustup target add aarch64-pc-windows-msvc
 
       - name: 安装 sccache
+        if: ${{ false }}  # Windows 禁用 sccache（命令行长度限制，见下方说明）
         shell: pwsh
         run: |
           $installed = $false
@@ -728,13 +727,10 @@ jobs:
             }
           }
 
-          if ($installed) {
-            echo "SCCACHE_AVAILABLE=true" >> $env:GITHUB_ENV
-            Write-Host "✓ sccache 可用，将启用编译缓存"
-          } else {
-            echo "SCCACHE_AVAILABLE=false" >> $env:GITHUB_ENV
-            Write-Host "⚠ sccache 所有安装方式均失败，将不使用编译缓存"
-          }
+          # Windows 上 sccache 包装 rustc 后命令行会超过 32K 限制
+          # （os error 206: The filename or extension is too long），禁用编译缓存。
+          echo "SCCACHE_AVAILABLE=false" >> $env:GITHUB_ENV
+          Write-Host "⚠ Windows 构建禁用 sccache（命令行长度限制）"
 
       - name: 从 Artifact 恢复 sccache 缓存
         if: env.SCCACHE_AVAILABLE == 'true'
