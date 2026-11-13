@@ -272,33 +272,53 @@ async def _translate_batch(
         numbered[numbered_original] = ""
         placeholder_map[numbered_original] = (original, placeholders)
 
-    raw_result = await _fetch_translation(
-        client, model, file_path, numbered, file_content, system_prompt,
-    )
-    if not raw_result:
-        return {}
-
-    result: dict[str, str] = {}
-    for numbered_original, value in raw_result.items():
-        entry = placeholder_map.get(numbered_original)
-        if entry is None:
-            continue
-        original, placeholders = entry
-        if value and not placeholder_markers_in_order(value, len(placeholders)):
-            log.warning(
-                "占位符顺序错误，丢弃译文: %r → %r [%s]",
-                original, value, file_path,
-            )
-            value = ""
-        elif value:
-            value = restore_anonymous_placeholders(value, placeholders)
-            if not check_rust_paths(original, value):
+    def restore(raw_result: dict[str, str]) -> dict[str, str]:
+        """把编号化译文还原为原文，并执行路径/占位符护栏。"""
+        restored: dict[str, str] = {}
+        for numbered_original, value in raw_result.items():
+            entry = placeholder_map.get(numbered_original)
+            if entry is None:
                 log.warning(
-                    "Rust 路径被改写，丢弃译文: %r → %r [%s]",
+                    "模型返回未知 key（占位符标记可能被改写），丢弃: %r [%s]",
+                    numbered_original, file_path,
+                )
+                continue
+            original, placeholders = entry
+            if value and not placeholder_markers_in_order(value, len(placeholders)):
+                log.warning(
+                    "占位符顺序错误，丢弃译文: %r → %r [%s]",
                     original, value, file_path,
                 )
                 value = ""
-        result[original] = value
+            elif value:
+                value = restore_anonymous_placeholders(value, placeholders)
+                if not check_rust_paths(original, value):
+                    log.warning(
+                        "Rust 路径被改写，丢弃译文: %r → %r [%s]",
+                        original, value, file_path,
+                    )
+                    value = ""
+            restored[original] = value
+        return restored
+
+    result: dict[str, str] = {}
+    for attempt in range(2):
+        raw_result = await _fetch_translation(
+            client, model, file_path, numbered, file_content, system_prompt,
+        )
+        if not raw_result:
+            if attempt == 0:
+                log.warning("翻译批次返回空，重试一次: %s", file_path)
+                continue
+            return {}
+        result = restore(raw_result)
+        if result:
+            break
+        if attempt == 0:
+            log.warning("本批译文全部被护栏丢弃，重试一次: %s", file_path)
+
+    if not result:
+        return {}
 
     # 占位符校验 + 重试（最多 2 次）
     for retry in range(2):
