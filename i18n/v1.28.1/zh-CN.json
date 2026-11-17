@@ -11686,7 +11686,7 @@
         "{profile_name} — Configure MCP Tools": "{profile_name} — 配置 MCP 工具"
     },
     "zed/crates/agent_ui/src/agent_configuration/tool_picker.rs": {
-        "tool picker": "",
+        "tool picker": "工具选择器",
         "Search built-in tools…": "搜索内置工具…",
         "Search MCP tools…": "搜索 MCP 工具…"
     },
@@ -13924,7 +13924,7 @@
         "  mcp__server__**read_file**<raw>  ": "",
         "Tool:   mcp__server__**read_file**<raw>  ": "",
         "edit_file": "",
-        "Interrupted Edit\\nTool: edit_file": "",
+        "Interrupted Edit\\nTool: edit_file": "已中断的编辑\n工具: edit_file",
         "compact": "",
         "deploy": "",
         "/compact summarize the API work": "",
@@ -15647,14 +15647,14 @@
         "Expected exactly one event": "预期恰好一个事件",
         "Expected ConfirmRequested with execute: true, got {:?}": "预期 ConfirmRequested 且 execute: true,实际得到 {:?}",
         "ConfirmRequested {{ execute: {} }}": "",
-        "other event": "",
+        "other event": "其他事件",
         "Expected ConfirmRequested with execute: false": "预期 ConfirmRequested 且 execute: false",
-        "encode png": "",
+        "encode png": "编码PNG",
         "/tmp/screenshot.png": "",
         "Image": "图片",
         "{} ": "",
         "/tmp/notes.txt": "",
-        "fake default model": ""
+        "fake default model": "模拟默认模型"
     },
     "zed/crates/agent_ui/src/language_model_selector.rs": {
         "Favorite": "收藏",
@@ -16201,7 +16201,7 @@
         "Chat about your codebase.": "围绕代码库进行对话。",
         "Chat about anything with no tools.": "不使用工具进行任意对话。",
         "Custom Profiles": "自定义配置",
-        "profile selector": "",
+        "profile selector": "配置选择器",
         "Search profiles…": "搜索配置…",
         "No profiles.": "没有配置。",
         "No profiles match your search.": "没有匹配的配置。",
@@ -19494,7 +19494,7 @@
         "export {}=\\\"{}\\\"": ""
     },
     "zed/crates/collab/src/db/ids.rs": {
-        "error converting ": "",
+        "error converting ": "转换错误 ",
         " to u64": "",
         "SharedThreadId uses UUID and cannot be converted from u64": "SharedThreadId 使用 UUID,无法从 u64 转换",
         "String": "",
@@ -19888,7 +19888,7 @@
         "queue_duration_ms": "",
         "host_waiting_ms": "",
         "too many concurrent connections: {}": "并发连接过多: {}",
-        "the handler intended to end the stream": "",
+        "the handler intended to end the stream": "处理程序打算结束流",
         "user_id": "",
         "username": "",
         "login": "",
