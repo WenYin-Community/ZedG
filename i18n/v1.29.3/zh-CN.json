@@ -47655,7 +47655,7 @@
         "{underline:?}": "",
         "randomized-tree-root": "",
         "randomized-spinner": "",
-        "Retained glyphs: abc Ω, now with enough words that narrow parents wrap them": "",
+        "Retained glyphs: abc Ω, now with enough words that narrow parents wrap them": "保留字形:abc Ω,现在有足够多的词,窄父元素会将其换行",
         "Ω": "",
         "": ""
     },
@@ -80031,7 +80031,7 @@
         "Implicit User": "",
         "Clean Slate": "",
         "default": "",
-        "Custom on Defaults": "",
+        "Custom on Defaults": "默认值上的自定义",
         "z": "",
         "e": "",
         "d": "",
@@ -81977,9 +81977,9 @@
         "No active project found. Open a workspace to manage MCP servers.": "未找到活动项目。打开工作区以管理 MCP 服务器。",
         "1 tool": "1 个工具",
         "{} tools": "{} 个工具",
-        " MCP Server": "",
+        " MCP Server": " MCP 服务器",
         " MCP": "",
-        " Context Server": "",
+        " Context Server": " 上下文 服务器",
         "mcp-configure-btn-{}": "",
         "Configure MCP Server": "配置 MCP 服务器",
         "mcp-uninstall-btn-{}": "",
@@ -89568,7 +89568,7 @@
     "zed/crates/ui/src/components/ai/agent_setup_button.rs": {
         "Default": "默认",
         "preview": "",
-        "Zed Agent": ""
+        "Zed Agent": "Zed 助手"
     },
     "zed/crates/ui/src/components/ai/ai_setting_item.rs": {
         "Server is stopped.": "服务器已停止。",
@@ -90475,7 +90475,7 @@
         "Bitbucket": "",
         "Chromium": "",
         "Codeberg": "",
-        "Forgejo Self-Hosted": "",
+        "Forgejo Self-Hosted": "Forgejo 自托管",
         "GitHub": "",
         "GitLab": "",
         "Gitea": "",
@@ -90500,7 +90500,7 @@
         "Accent Color": "强调色",
         "Error Color": "错误色",
         "Different Vectors": "不同矢量图",
-        "Zed X Copilot": "",
+        "Zed X Copilot": "Zed X Copilot",
         "images/zed_logo.svg": ""
     },
     "zed/crates/ui/src/components/indent_guides.rs": {
